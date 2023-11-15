@@ -1,6 +1,7 @@
 package com.marques.dto;
 
 import com.marques.entities.Game;
+import com.marques.projections.GameMinProjection;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,5 +21,12 @@ public class GameMinDTO {
         this.year = game.getYear();
         this.imgUrl = game.getImgUrl();
         this.shortDescription = game.getShortDescription();
+    }
+    public GameMinDTO(GameMinProjection projection){
+        this.id = projection.getId();
+        this.title = projection.getTitle();
+        this.year = projection.getGameYear();
+        this.imgUrl = projection.getImgUrl();
+        this.shortDescription = projection.getShortDescription();
     }
 }

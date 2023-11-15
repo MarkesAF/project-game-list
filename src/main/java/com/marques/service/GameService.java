@@ -3,6 +3,7 @@ package com.marques.service;
 import com.marques.dto.GameDTO;
 import com.marques.dto.GameMinDTO;
 import com.marques.entities.Game;
+import com.marques.projections.GameMinProjection;
 import com.marques.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,12 @@ public class GameService {
     public GameDTO findById(Long id){
         Game game = rep.findById(id).get();
         return new GameDTO(game);
+    }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDTO>findByList(Long listId){
+        List<GameMinProjection> list = rep.searchByList(listId);
+        return list.stream().map(GameMinDTO::new).toList();
     }
 
 }
